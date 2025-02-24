@@ -7,8 +7,9 @@ import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
-import { futureSlams, slams } from '@/data';
-import { FormData, type Payload, type PayloadGenerator } from '@/forms';
+import { futureSlams, slams } from '~/data';
+import { FormData, type Payload, type PayloadGenerator } from '~/forms';
+
 
 type Data = {
     name: string,

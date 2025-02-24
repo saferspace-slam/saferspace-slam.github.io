@@ -14,3 +14,12 @@ export function saveTextAsFile(filename: string, data: string) {
         document.body.removeChild(elem);
     }
 }
+
+export function setSeo(title: string, description: string) {
+    useHead({
+        title,
+        meta: [
+            { name: 'description', content: description }
+        ]
+    })
+}

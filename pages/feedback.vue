@@ -4,6 +4,9 @@ import Form from '@/components/forms/Form.vue';
 import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import PageHeading from '@/components/PageHeading.vue';
 import { emptyFormPayload, FormData } from '~/forms';
+import { setSeo } from '~/helpers';
+
+setSeo("Saferspace Slam - Feedback", "Queerer Poetry Slam in Hamburg");
 
 const form = new FormData("Feedback", emptyFormPayload());
 const formPayload = form.payload;

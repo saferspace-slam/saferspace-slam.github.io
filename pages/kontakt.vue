@@ -4,7 +4,7 @@ import Form from '@/components/forms/Form.vue';
 import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import PageHeading from '@/components/PageHeading.vue';
-import { emptyFormPayload, FormData } from '@/forms';
+import { emptyFormPayload, FormData } from '~/forms';
 
 const form = new FormData("Kontakt", emptyFormPayload());
 const formPayload = form.payload;

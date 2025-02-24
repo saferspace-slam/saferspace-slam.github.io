@@ -5,6 +5,9 @@ import InstagramInline from '~/components/InstagramInline.vue';
 import PageHeading from '~/components/PageHeading.vue';
 import { ref } from 'vue';
 import { useStore } from '~/store';
+import { setSeo } from '~/helpers';
+
+setSeo("Saferspace Slam", "Queerer Poetry Slam in Hamburg");
 
 const store = useStore();
 const startOfContent = ref();
@@ -41,8 +44,9 @@ const startOfContent = ref();
         mit selbstgeschriebenen Texten auf die Bühne stellen, um sie mit dem Publikum zu teilen. Lustige und traurige,
         lyrische und prosaische, laute und leise Texte. Ein Safespace für alle, die gerade einen brauchen. <br><br>
 
-        Wir bemühen uns um möglichst viel Barrierefreiheit, genauere Infos findet ihr 
-        auf <InstagramInline/>.
+        Wir bemühen uns um möglichst viel Barrierefreiheit, genauere Infos findet ihr
+        auf
+        <InstagramInline />.
 
       </p>
     </div>
