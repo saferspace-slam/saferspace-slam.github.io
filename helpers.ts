@@ -23,7 +23,7 @@ export function setSeo(title: string, description: string, ) {
             { property: 'og:title', content: title },
             { property: 'og:description', content: description },
             { property: 'og:type', content: 'website' },
-            { property: 'og:image', content: '/sharepic.jpg' },
+            { property: 'og:image', content: 'https://saferspace-slam.de/sharepic.jpg' },
             { name: 'twitter:card', content: 'summary_large_image' },
         ]
     })
