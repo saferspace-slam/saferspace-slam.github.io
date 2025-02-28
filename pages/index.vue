@@ -7,7 +7,10 @@ import { ref } from 'vue';
 import { useStore } from '~/store';
 import { setSeo } from '~/helpers';
 
-setSeo("Saferspace Slam", "Queerer Poetry Slam in Hamburg");
+setSeo(
+  "Saferspace Slam",
+  "Queerer Poetry Slam in Hamburg, jeden 3. Mittwoch im Monat um 20 Uhr"
+);
 
 const store = useStore();
 const startOfContent = ref();

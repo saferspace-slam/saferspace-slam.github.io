@@ -4,6 +4,12 @@ import Content from '@/components/Content.vue';
 import PageHeading from '@/components/PageHeading.vue';
 import { futureSlams, pastSlams } from '@/data';
 import { ref, type Ref } from 'vue';
+import { setSeo } from '~/helpers';
+
+setSeo(
+  "Veranstaltungen - Saferspace Slam",
+  "Hier findest du unsere aktuellen und vergangenen Veranstaltungen."
+);
 
 const activePage: Ref<"future" | "past"> = ref("future");
 </script>

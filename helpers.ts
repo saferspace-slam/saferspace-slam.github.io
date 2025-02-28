@@ -15,11 +15,16 @@ export function saveTextAsFile(filename: string, data: string) {
     }
 }
 
-export function setSeo(title: string, description: string) {
+export function setSeo(title: string, description: string, ) {
     useHead({
         title,
         meta: [
-            { name: 'description', content: description }
+            { name: 'description', content: description },
+            { property: 'og:title', content: title },
+            { property: 'og:description', content: description },
+            { property: 'og:type', content: 'website' },
+            { property: 'og:image', content: '/sharepic.jpg' },
+            { name: 'twitter:card', content: 'summary_large_image' },
         ]
     })
 }

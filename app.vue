@@ -3,6 +3,7 @@ import { useStore } from './store';
 
 import "~/assets/css/main.css"
 import 'material-symbols'
+import { setSeo } from './helpers';
 
 useHead({
   link: [

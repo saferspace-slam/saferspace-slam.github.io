@@ -5,6 +5,12 @@ import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import PageHeading from '@/components/PageHeading.vue';
 import { emptyFormPayload, FormData } from '~/forms';
+import { setSeo } from '~/helpers';
+
+setSeo(
+  "Kontakt - Saferspace Slam",
+  "Du hast Fragen, Ideen, Anmerkungen, Kritik oder Lob? Dann kannst du uns gerne hier kontaktieren."
+);
 
 const form = new FormData("Kontakt", emptyFormPayload());
 const formPayload = form.payload;

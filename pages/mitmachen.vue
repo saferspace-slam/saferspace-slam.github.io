@@ -9,7 +9,12 @@ import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
 import { futureSlams, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
+import { setSeo } from '~/helpers';
 
+setSeo(
+  "Mitmachen - Saferspace Slam",
+  "Du möchtest bei uns auftreten? Dann findest du hier weitere Informationen und ein Formular zum Anmelden."
+);
 
 type Data = {
     name: string,
