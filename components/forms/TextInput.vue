@@ -5,7 +5,7 @@ const props = defineProps<{
     type: "text" | "email",
     required?: boolean,
 }>();
-const value = defineModel<string>();
+const value = defineModel<string>({ required: true });
 </script>
 
 <template>

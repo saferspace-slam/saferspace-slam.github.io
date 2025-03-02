@@ -3,7 +3,7 @@ const props = defineProps<{
     displayName: string,
     required?: boolean,
 }>();
-const value = defineModel<boolean>();
+const value = defineModel<boolean>({ required: true });
 </script>
 
 <template>

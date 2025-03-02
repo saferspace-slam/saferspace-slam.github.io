@@ -2,9 +2,11 @@
 import AddToCalendar from '@/components/AddToCalendar.vue';
 import Content from '@/components/Content.vue';
 import PageHeading from '@/components/PageHeading.vue';
-import { futureSlams, pastSlams } from '@/data';
+import { computeData } from '@/data';
 import { ref, type Ref } from 'vue';
 import { setSeo } from '~/helpers';
+
+const {futureSlams, pastSlams} = computeData();
 
 setSeo(
   "Veranstaltungen - Saferspace Slam",

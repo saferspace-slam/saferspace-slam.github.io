@@ -4,7 +4,7 @@ const props = defineProps<{
     placeholder: string,
     required?: boolean,
 }>();
-const value = defineModel<string>();
+const value = defineModel<string>({ required: true });
 </script>
 
 <template>

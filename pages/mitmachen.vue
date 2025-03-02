@@ -7,9 +7,11 @@ import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
-import { futureSlams, slams } from '~/data';
+import { computeData, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
 import { setSeo } from '~/helpers';
+
+const { futureSlams } = computeData();
 
 setSeo(
   "Mitmachen - Saferspace Slam",
@@ -55,8 +57,8 @@ function emptyData(): Data {
 const form = new FormData<PayloadGenerator<Data>, Data>("Mitmachen", { data: emptyData(), generatePayload, emptyData });
 const formPayload = form.payload.value.data;
 
-const slamDates = futureSlams.map(s => s.date.toLocaleDateString("de"));
-console.log({ slams, futureSlams })
+const slamDates = computed(() => futureSlams.value.map(s => s.date.toLocaleDateString("de")));
+console.log({ slams, futureSlams, slamDates })
 </script>
 
 <template>

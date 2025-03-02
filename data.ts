@@ -11,5 +11,17 @@ export const slams = data.slams.map(s => {
         startDateTime, endDateTime
     }
 });
-export const futureSlams = slams.filter(s => s.date >= new Date()).sort()
-export const pastSlams = slams.filter(s => s.date < new Date()).sort().reverse()
+
+type Slam = typeof slams[0];
+
+export const computeData = () => {
+    const futureSlams: Ref<Slam[]> = ref([]);
+    const pastSlams: Ref<Slam[]> = ref([]);
+
+    onMounted(() => {
+        futureSlams.value = slams.filter(s => s.date >= new Date());
+        pastSlams.value = slams.filter(s => s.date < new Date()).sort().reverse();
+    });
+
+    return { futureSlams, pastSlams }
+}
