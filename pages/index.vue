@@ -43,7 +43,7 @@ const startOfContent = ref();
         Du hast Lust auf einen ganz besonderen literarischen Abend voller Emotionen, gesprochener Worte und queerer
         Gedanken? <br><br>
 
-        Dann ist dieser Poetryslam genau die richtige Veranstaltung für dich! Hier erwarten dich Slamer:innen, die sich
+        Dann ist dieser Poetryslam genau die richtige Veranstaltung für dich. Hier erwarten dich Slamer:innen, die sich
         mit selbstgeschriebenen Texten auf die Bühne stellen, um sie mit dem Publikum zu teilen. Lustige und traurige,
         lyrische und prosaische, laute und leise Texte. Ein Safespace für alle, die gerade einen brauchen. <br><br>
 
