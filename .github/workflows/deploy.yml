@@ -1,10 +1,10 @@
 # .github/workflows/nuxt-hub.yml
-name: Deploy to NuxtHub
+name: Deploy
 on: push
 
 jobs:
   deploy:
-    name: "Deploy to NuxtHub"
+    name: "Deploy"
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -23,8 +23,7 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Install dependencies
-        run: yarn install
-
       - name: Deploy site
         run: yarn deploy
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
