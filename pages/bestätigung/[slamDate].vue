@@ -14,22 +14,21 @@ import { setSeo } from '~/helpers';
 
 const { futureSlams } = computeData();
 
-const slamDateRaw = useRoute().params.slamDate as string;
-const slamDate = new Date(slamDateRaw);
-const slamDateRendered = slamDate.toLocaleDateString("de");
+const slamDate = new Date(useRoute().params.slamDate as string).toLocaleDateString('de');
+const dueDate = new Date(new Date(useRoute().params.slamDate as string).getTime() - 5 * 24 * 60 * 60 * 1000).toLocaleDateString('de');
 
 setSeo(
-    `Bestätigung ${slamDateRendered} - Saferspace Slam`,
-    "Du möchtest bei uns auftreten? Dann findest du hier weitere Informationen und ein Formular zum Anmelden."
+    `Bestätigung ${slamDate} - Saferspace Slam`,
+    `Bestätige hier bitte deinen Auftritt am ${slamDate} bei uns`
 );
 
 type Data = {
     name: string,
+    stageName: string,
     pronouns: string,
-    email: string,
+    contentWarnings: string,
     instagram: string,
     aboutMe: string,
-    slamDate: string,
     introduction: boolean,
     introductionText: string,
     pictures: FileInfo[],
@@ -40,11 +39,11 @@ type Data = {
 function emptyData(): Data {
     return {
         name: "",
+        stageName: "",
         pronouns: "",
-        email: "",
+        contentWarnings: "",
         instagram: "",
         aboutMe: "",
-        slamDate: "",
         introduction: false,
         introductionText: "",
         pictures: [],
@@ -56,27 +55,40 @@ function emptyData(): Data {
 function generatePayload(data: Data): Payload {
     return {
         name: data.name,
-        email: data.email,
-        subject: `${data.name}`,
+        email: "",
+        subject: `Bestätigung ${slamDate}`,
         message: `
-Pronomen: ${data.pronouns || "keine"}
-Instagram: ${data.instagram}
-Über mich: ${data.aboutMe}
-Slam-Datum: ${data.slamDate}
-Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}`,
+Name: ${data.name}
+Stage Name: ${data.stageName}
+Pronomen: ${data.pronouns ?? "Keine"}
+Inhaltliche Warnungen: ${data.contentWarnings}
+Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}
+Texte für Hörgeschädigte: ${data.dontIncludeTexts ? "Nein" : "Ja"}
+${data.introduction ?
+                `Instagram: ${data.instagram ?? "Keins"}
+Über mich: ${data.aboutMe}`
+                : ''}
+                `,
         files: [
             ...data.pictures.map((pic, i) => {
                 return {
                     data: pic.data,
-                    filename: `Picture ${i}.${pic.type.split("/")[1]}`,
+                    filename: `Foto ${i + 1} - ${pic.filename}`,
                     type: pic.type,
+                }
+            }),
+            ...data.texts.map((text, i) => {
+                return {
+                    data: text.data,
+                    filename: `Text ${i + 1} - ${text.filename}`,
+                    type: text.type,
                 }
             })
         ]
     }
 }
 
-const form = new FormData<PayloadGenerator<Data>, Data>("Mitmachen", { data: emptyData(), generatePayload, emptyData });
+const form = new FormData<PayloadGenerator<Data>, Data>("Bestätigen", { data: emptyData(), generatePayload, emptyData });
 const formPayload = form.payload.value.data;
 
 const slamDates = computed(() => futureSlams.value.map(s => s.date.toLocaleDateString("de")));
@@ -85,54 +97,64 @@ console.log({ slams, futureSlams, slamDates })
 
 <template>
     <Content>
-        <PageHeading>Bestätigung {{ slamDateRendered }}</PageHeading>
+        <PageHeading>Bestätigung {{ slamDate }}</PageHeading>
 
         <div class="flex flex-col lg:flex-row gap-10">
             <div class="lg:mt-8 flex-1">
                 <p>
-                    Du möchtest bei uns auftreten?
+                    Wir freuen uns sehr, dass du am {{ slamDate }} bei uns auftrittst!
                     <br><br>
-                    Wir wollen allen queeren Menschen eine Bühne geben, egal ob sie das erste mal vor Publikum sprechen
-                    oder schon viel Erfahrung mitbringen. Die einzige Voraussetzung ist, dass du drei selbst
-                    geschriebene Texte mitbringst und bereit bist, diese vor Publikum zu sprechen - mit oder ohne Blatt,
-                    ganz wie du willst. Ansonsten sind allerdings auch keine Requisiten erlaubt.
+                    Wir haben auf jeden Fall schon einen Platz für dich reserviert, aber um dich tatsächlich fest
+                    einzuplanen, brauchen wir jetzt im Vorhinein noch ein paar Informationen von dir, <strong
+                        class="font-bold!">deswegen fülle dieses Formular bitte spätestens bist zum {{ dueDate }}
+                        aus</strong>.
                     <br><br>
-                    Pro Termin treten bei uns sechs Poet:innen auf, deswegen trage dich bitte frühzeitig für deinen
-                    Wunschtermin ein. Wenn wir da schon voll sind, werden wir dich mit Alternativen kontaktieren.
+                    Stage Name und Pronomen fragen wir dich, damit wir wissen wie wir dich am Tag des Slams ankündigen
+                    sollen.
                     <br><br>
-                    Am Tag des Slams bitten wir dich bereits um 18:30 Uhr vor Ort zu sein, plane also ausreichend Zeit
-                    ein.
-                    <br><br>
-                    Wir würden dich im Vorhinein gerne auf unserem Instagram
-                    <InstagramInline /> und hier auf der Website mit deinem
-                    "Über
-                    dich"-Text ankündigen. Falls du das willst (du musst nicht, um bei uns aufzutreten!),
-                    stimme dem bitte im Formular zu. Wir verlinken auch gerne deinen Instagram-Account, deswegen kannst
-                    du den hier auch optional angeben.
-                    <br><br>
-                    Wir freuen uns auf dich!
+                    Anders als viele andere Slams bitten wir dich, dir schon im Vorhinein fest zu überlegen, welche
+                    Texte du bei uns sprechen willst. Das hat zwei Gründe: <br><br>
+                <ul class="list-disc ml-6">
+                    <li>
+                        Einerseits wollen wir auch Menschen ermöglichen, an unserem Slam teilzuhaben, die ein
+                        gesprochenes Bühnenprogramm nicht ohne weiteres verstehen können. Deswegen drucken wir die Texte
+                        aller Poet:innen vorher aus und stellen sie Menschen, die sie brauchen, für die Dauer des Slams
+                        zur Verfügung. Darüber hinaus teilen wir deine Texte natürlich mit niemandem! <br><br>
+                    </li>
+                    <li>
+                        Andererseits wollen wir schon im Vorhinein ankündigen über welche potenziell retraumatisierenden
+                        Themen am Abend gesprochen wird. So ermöglichen wir Menschen für sich zu entscheiden, ob sie
+                        gar nicht erst kommen wollen, wenn sie sich mit diesen Themen nicht wohl fühlen.
+                    </li>
+                </ul>
+                <br>
+                Wir würden dich im Vorhinein gerne auf unserem Instagram
+                <InstagramInline /> und hier auf der Website mit einem Foto oder Video und einem kurzen Text
+                ankündigen. Falls du das willst (du musst nicht, um bei uns aufzutreten!), trage das gerne im Formular
+                so ein. Wir verlinken auch gerne deinen Instagram-Account, deswegen kannst du den auch optional angeben.
+                <br><br>
+                <strong class="font-bold!">Wir freuen uns auf dich!</strong>
                 </p>
             </div>
             <Form :form="form" class="flex-1">
                 <TextInput required v-model="formPayload.name" display-name="Name" placeholder="Dein Name"
                     type="text" />
 
-                <TextInput v-model="formPayload.name" display-name="Stage Name (falls vorhanden)"
+                <TextInput v-model="formPayload.stageName" display-name="Stage Name (falls vorhanden)"
                     placeholder="Der Name, mit dem du vorgestellt werden willst" type="text" />
 
                 <TextInput v-model="formPayload.pronouns" display-name="Pronomen (falls du welche benutzt)"
                     placeholder='Deine Pronomen' type="text" />
 
-                <TextAreaInput required v-model="formPayload.aboutMe" display-name="Inhaltliche Warnungen"
+                <TextAreaInput required v-model="formPayload.contentWarnings" display-name="Inhaltliche Warnungen"
                     placeholder="Nenne hier bitte Themen in deinen Texten, die für manche Menschen schwierig sind, sodass wir im Vorfeld darüber informieren können. Beispiele wären etwa Suizid, Self-Harm oder sexuelle Übergriffe." />
-
 
                 <CheckboxInput v-model="formPayload.dontIncludeTexts"
                     display-name='Ich möchte meine Texte *nicht* für hörgeschädigte Menschen bereitstellen.' />
 
                 <FileInput v-if="!formPayload.dontIncludeTexts" required multiple
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
-                    v-model="formPayload.pictures" display-name="Texte für hörgeschädigte Menschen" />
+                    v-model="formPayload.texts" display-name="Texte für hörgeschädigte Menschen" />
 
                 <CheckboxInput v-model="formPayload.introduction"
                     display-name='Ich möchte auf Instagram (@saferspace_slam) und auf saferspace-slam.de angekündigt werden.' />

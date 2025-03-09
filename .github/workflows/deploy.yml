@@ -1,10 +1,10 @@
 # .github/workflows/nuxt-hub.yml
-name: Deploy
+name: Build and Push
 on: push
 
 jobs:
   deploy:
-    name: "Deploy"
+    name: "Build and Push"
     runs-on: ubuntu-latest
     permissions:
       contents: write

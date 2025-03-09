@@ -21,29 +21,21 @@ setSeo(
 
 type Data = {
     name: string,
-    pronouns: string,
     email: string,
     phone: string,
-    instagram: string,
     aboutMe: string,
     slamDate: string,
-    introduction: boolean,
     travelExpenses: boolean,
-    pictures: FileInfo[],
 }
 
 function emptyData(): Data {
     return {
         name: "",
-        pronouns: "",
         email: "",
         phone: "",
-        instagram: "",
         aboutMe: "",
         slamDate: "",
-        introduction: false,
         travelExpenses: false,
-        pictures: [],
     }
 }
 
@@ -51,22 +43,14 @@ function generatePayload(data: Data): Payload {
     return {
         name: data.name,
         email: data.email,
-        subject: `${data.name}`,
+        subject: `Anmeldung ${new Date(data.slamDate).toLocaleDateString('de')}`,
         message: `
-Pronomen: ${data.pronouns || "keine"}
-Instagram: ${data.instagram}
-Über mich: ${data.aboutMe}
 Slam-Datum: ${data.slamDate}
-Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}`,
-        files: [
-            ...data.pictures.map((pic, i) => {
-                return {
-                    data: pic.data,
-                    filename: `Picture ${i}.${pic.type.split("/")[1]}`,
-                    type: pic.type,
-                }
-            })
-        ]
+Fahrtkosten: ${data.travelExpenses ? 'Ja' : 'Nein'}
+Email: ${data.email}
+Handynummer: ${data.phone ?? 'Keine'}
+Über mich: ${data.aboutMe}`,
+        files: [],
     }
 }
 
@@ -105,7 +89,7 @@ console.log({ slams, futureSlams, slamDates })
                     type="text" />
                 <TextInput required v-model="formPayload.email" display-name="Email-Adresse"
                     placeholder="Deine Email-Adresse" type="text" />
-                <TextInput v-model="formPayload.email" display-name="Handynummer (optional, aber hilfreich)"
+                <TextInput v-model="formPayload.phone" display-name="Handynummer (optional, aber hilfreich)"
                     placeholder="Deine Handynummer" type="text" />
                 <SelectInput required v-model="formPayload.slamDate" display-name="Slam-Datum"
                     placeholder="Wann möchtest du auftreten?" :options="slamDates" />
