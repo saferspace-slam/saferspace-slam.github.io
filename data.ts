@@ -1,4 +1,4 @@
-const data = await import("@/data.json");
+const data = await import("~/data.json");
 
 export const slams = data.slams.map(s => {
     const startDateTime = new Date(s.date);

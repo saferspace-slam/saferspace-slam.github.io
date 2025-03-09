@@ -3,7 +3,10 @@ import { useStore } from './store';
 
 import "~/assets/css/main.css"
 import 'material-symbols'
-import { setSeo } from './helpers';
+import data from './data.json';
+
+const confirmRoutes = data.slams.map(s => `/bestätigung/${s.date}`);
+prerenderRoutes(confirmRoutes);
 
 useHead({
   link: [

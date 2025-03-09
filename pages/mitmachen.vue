@@ -7,6 +7,7 @@ import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
+import FileInput, { type FileInfo } from '~/components/forms/FileInput.vue';
 import { computeData, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
 import { setSeo } from '~/helpers';
@@ -14,18 +15,36 @@ import { setSeo } from '~/helpers';
 const { futureSlams } = computeData();
 
 setSeo(
-  "Mitmachen - Saferspace Slam",
-  "Du möchtest bei uns auftreten? Dann findest du hier weitere Informationen und ein Formular zum Anmelden."
+    "Mitmachen - Saferspace Slam",
+    "Du möchtest bei uns auftreten? Dann findest du hier weitere Informationen und ein Formular zum Anmelden."
 );
 
 type Data = {
     name: string,
     pronouns: string,
     email: string,
+    phone: string,
     instagram: string,
     aboutMe: string,
     slamDate: string,
     introduction: boolean,
+    travelExpenses: boolean,
+    pictures: FileInfo[],
+}
+
+function emptyData(): Data {
+    return {
+        name: "",
+        pronouns: "",
+        email: "",
+        phone: "",
+        instagram: "",
+        aboutMe: "",
+        slamDate: "",
+        introduction: false,
+        travelExpenses: false,
+        pictures: [],
+    }
 }
 
 function generatePayload(data: Data): Payload {
@@ -38,19 +57,16 @@ Pronomen: ${data.pronouns || "keine"}
 Instagram: ${data.instagram}
 Über mich: ${data.aboutMe}
 Slam-Datum: ${data.slamDate}
-Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}`
-    }
-}
-
-function emptyData(): Data {
-    return {
-        name: "",
-        pronouns: "",
-        email: "",
-        instagram: "",
-        aboutMe: "",
-        slamDate: "",
-        introduction: false,
+Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}`,
+        files: [
+            ...data.pictures.map((pic, i) => {
+                return {
+                    data: pic.data,
+                    filename: `Picture ${i}.${pic.type.split("/")[1]}`,
+                    type: pic.type,
+                }
+            })
+        ]
     }
 }
 
@@ -81,31 +97,23 @@ console.log({ slams, futureSlams, slamDates })
                     Am Tag des Slams bitten wir dich bereits um 18:30 Uhr vor Ort zu sein, plane also ausreichend Zeit
                     ein.
                     <br><br>
-                    Wir würden dich im Vorhinein gerne auf unserem Instagram
-                    <InstagramInline /> und hier auf der Website mit deinem
-                    "Über
-                    dich"-Text ankündigen. Falls du das willst (du musst nicht, um bei uns aufzutreten!),
-                    stimme dem bitte im Formular zu. Wir verlinken auch gerne deinen Instagram-Account, deswegen kannst
-                    du den hier auch optional angeben.
-                    <br><br>
                     Wir freuen uns auf dich!
                 </p>
             </div>
             <Form :form="form" class="flex-1">
                 <TextInput required v-model="formPayload.name" display-name="Name" placeholder="Dein Name"
                     type="text" />
-                <TextInput v-model="formPayload.pronouns" display-name="Pronomen, falls du welche benutzt"
-                    placeholder='Deine Pronomen' type="text" />
                 <TextInput required v-model="formPayload.email" display-name="Email-Adresse"
                     placeholder="Deine Email-Adresse" type="text" />
-                <TextInput v-model="formPayload.instagram" display-name="Instagram"
-                    placeholder="Dein Instagram Account Name" type="text" />
+                <TextInput v-model="formPayload.email" display-name="Handynummer (optional, aber hilfreich)"
+                    placeholder="Deine Handynummer" type="text" />
                 <SelectInput required v-model="formPayload.slamDate" display-name="Slam-Datum"
                     placeholder="Wann möchtest du auftreten?" :options="slamDates" />
                 <TextAreaInput required v-model="formPayload.aboutMe" display-name="Über dich"
                     placeholder="Erzähl uns gerne ein bisschen was über dich! Was für Texte schreibst du? Wäre das dein erster Slam oder dein hundertster Auftritt? Was motiviert dich zum Schreiben?" />
-                <CheckboxInput v-model="formPayload.introduction"
-                    display-name='Ich möchte auf Instagram (@saferspace_slam) und auf saferspace-slam.de mit meinem "Über mich"-Text angekündigt werden.' />
+                <CheckboxInput v-model="formPayload.travelExpenses"
+                    display-name='Ich brauche eine Fahrtkostenerstattung (nur mit Beleg und höchstens 50€)' />
+
             </Form>
         </div>
     </Content>

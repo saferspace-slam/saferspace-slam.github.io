@@ -5,6 +5,11 @@ export type Payload = {
     email: string,
     subject: string,
     message: string,
+    files: {
+        data: string,
+        filename: string,
+        type: string
+    }[],
 }
 
 export type PayloadGenerator<T> = {
@@ -23,6 +28,7 @@ export function emptyFormPayload(): Payload {
         email: "",
         message: "",
         subject: "",
+        files: [],
     }
 }
 
