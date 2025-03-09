@@ -13,19 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
         with:
           node-version: 22
-          cache: 'pnpm'
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install # will run `yarn install` command
 
       - name: Install dependencies
-        run: pnpm install
+        run: yarn install
 
-      - name: Build site
-        run: pnpm run deploy
+      - name: Deploy site
+        run: yarn deploy
