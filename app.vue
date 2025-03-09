@@ -5,7 +5,7 @@ import "~/assets/css/main.css"
 import 'material-symbols'
 import data from './data.json';
 
-const confirmRoutes = data.slams.map(s => `/bestätigung/${s.date}`);
+const confirmRoutes = data.slams.map(s => `/bestaetigung/${s.date}`);
 prerenderRoutes(confirmRoutes);
 
 useHead({
