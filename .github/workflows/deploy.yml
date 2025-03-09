@@ -18,13 +18,14 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install yarn and dependencies
+      - name: Install dependencies
         uses: borales/actions-yarn@v4
         with:
           cmd: install # will run `yarn install` command
 
       - name: Deploy site
         run: |
+            gh auth login --with-token
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action" 
             yarn deploy
