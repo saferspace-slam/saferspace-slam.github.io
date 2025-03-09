@@ -130,7 +130,7 @@ console.log({ slams, futureSlams, slamDates })
                 <br>
                 Wir würden dich im Vorhinein gerne auf unserem Instagram
                 <InstagramInline /> und hier auf der Website mit einem Foto oder Video und einem kurzen Text
-                ankündigen. Falls du das willst (du musst nicht, um bei uns aufzutreten!), trage das gerne im Formular
+                ankündigen. Falls du das willst (du musst nicht, um bei uns aufzutreten!), trage das bitte im Formular
                 so ein. Wir verlinken auch gerne deinen Instagram-Account, deswegen kannst du den auch optional angeben.
                 <br><br>
                 <strong class="font-bold!">Wir freuen uns auf dich!</strong>
