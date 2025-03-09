@@ -106,7 +106,7 @@ console.log({ slams, futureSlams, slamDates })
                     <br><br>
                     Wir haben auf jeden Fall schon einen Platz für dich reserviert, aber um dich tatsächlich fest
                     einzuplanen, brauchen wir jetzt im Vorhinein noch ein paar Informationen von dir, <strong
-                        class="font-bold!">deswegen fülle dieses Formular bitte spätestens bist zum {{ dueDate }}
+                        class="font-bold!">deswegen fülle dieses Formular bitte spätestens bis zum {{ dueDate }}
                         aus</strong>.
                     <br><br>
                     Stage Name und Pronomen fragen wir dich, damit wir wissen wie wir dich am Tag des Slams ankündigen
