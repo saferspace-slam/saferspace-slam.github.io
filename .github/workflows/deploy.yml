@@ -23,11 +23,8 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Deploy site
+      - name: Build and Deploy
         run: |
-            gh auth login --with-token
             git config --local user.email "action@github.com"
             git config --local user.name "GitHub Action" 
             yarn deploy
-        env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
