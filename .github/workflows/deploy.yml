@@ -13,17 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set Node.js 16.x
+      - name: Install Node
         uses: actions/setup-node@v3
         with:
           node-version: 22
 
-      - name: Run install
+      - name: Install yarn and dependencies
         uses: borales/actions-yarn@v4
         with:
           cmd: install # will run `yarn install` command
 
       - name: Deploy site
-        run: yarn deploy
+        run: |
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action" 
+            yarn deploy
         env:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
