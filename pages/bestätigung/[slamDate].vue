@@ -164,7 +164,7 @@ console.log({ slams, futureSlams, slamDates })
                         placeholder="Dein Instagram Account Name" type="text" />
                     <TextAreaInput required v-model="formPayload.aboutMe" display-name="Über dich"
                         placeholder="Der Text, mit dem wir dich ankündigen. Du kannst hier gerne den Über-dich Text aus deiner Anmeldung wiederverwenden." />
-                    <FileInput required multiple :file-types="['image/jpeg', 'image/png', 'image/webp']"
+                    <FileInput required :file-types="['image/jpeg', 'image/png', 'image/webp']"
                         v-model="formPayload.pictures" display-name="Foto / Video für die Ankündigung" />
                 </template>
             </Form>
