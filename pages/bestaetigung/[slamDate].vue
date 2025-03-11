@@ -151,7 +151,7 @@ console.log({ slams, futureSlams, slamDates })
                 <CheckboxInput v-model="formPayload.dontIncludeTexts"
                     display-name='Ich möchte meine Texte *nicht* für hörgeschädigte Menschen bereitstellen.' />
 
-                <ToggleInput v-model="formPayload.textsUploadFiles" option-false='Texte reinkopieren'
+                <ToggleInput v-if="!formPayload.dontIncludeTexts" v-model="formPayload.textsUploadFiles" option-false='Texte reinkopieren'
                     option-true="Texte als Dateien hochladen" />
 
                 <TextAreaInput v-if="!formPayload.dontIncludeTexts && !formPayload.textsUploadFiles" required
