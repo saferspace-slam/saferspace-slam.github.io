@@ -8,6 +8,7 @@ import TextInput from '@/components/forms/TextInput.vue';
 import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
 import FileInput, { } from '~/components/forms/FileInput.vue';
+import ToggleInput from '~/components/forms/ToggleInput.vue';
 import { computeData, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
 import { setSeo } from '~/helpers';
@@ -33,7 +34,9 @@ type Data = {
     introductionText: string,
     pictures: File[],
     dontIncludeTexts: boolean,
-    texts: File[],
+    textsUploadFiles: boolean,
+    textsText: string,
+    textsFiles: File[],
 }
 
 function emptyData(): Data {
@@ -48,7 +51,9 @@ function emptyData(): Data {
         introductionText: "",
         pictures: [],
         dontIncludeTexts: false,
-        texts: [],
+        textsUploadFiles: true,
+        textsText: "",
+        textsFiles: [],
     }
 }
 
@@ -63,7 +68,8 @@ Stage Name: <strong>${data.stageName || "Keiner"}</strong><br>
 Pronomen: <strong>${data.pronouns || "Keine"}</strong><br>
 Inhaltliche Warnungen: <strong>${data.contentWarnings}</strong><br>
 Zustimmung Ankündigung: <strong>${data.introduction ? "Ja" : "Nein"}</strong><br>
-Texte für Hörgeschädigte: <strong>${data.dontIncludeTexts ? "Nein" : "Ja"}</strong><br>
+Texte für Hörgeschädigte: <strong>${data.dontIncludeTexts ? "Nein" : "Ja"}${!data.textsUploadFiles ? `<br><br>${data.textsText}` : ''}</strong><br>
+
 ${data.introduction ?
                 `Instagram: <strong>${data.instagram || "Keins"}</strong><br>
 Über mich: <strong>${data.aboutMe}</strong>`
@@ -71,7 +77,7 @@ ${data.introduction ?
                 `,
         files: [
             ...(data.pictures.length ? [{ name: `${data.name} Foto/Video - ${data.pictures[0].name}`, file: data.pictures[0] }] : []),
-            ...data.texts.map((file, i) => {
+            ...data.textsFiles.map((file, i) => {
                 return {
                     name: `${data.name} Text ${i + 1} - ${file.name}`,
                     file,
@@ -145,9 +151,17 @@ console.log({ slams, futureSlams, slamDates })
                 <CheckboxInput v-model="formPayload.dontIncludeTexts"
                     display-name='Ich möchte meine Texte *nicht* für hörgeschädigte Menschen bereitstellen.' />
 
-                <FileInput v-if="!formPayload.dontIncludeTexts" required multiple
+                <ToggleInput v-model="formPayload.textsUploadFiles" option-false='Texte reinkopieren'
+                    option-true="Texte als Dateien hochladen" />
+
+                <TextAreaInput v-if="!formPayload.dontIncludeTexts && !formPayload.textsUploadFiles" required
+                    v-model="formPayload.textsText" display-name="Texte für hörgeschädigte Menschen"
+                    placeholder="Kopiere hier bitte deine Texte rein" />
+
+                <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles" required multiple
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
-                    v-model="formPayload.texts" display-name="Texte für hörgeschädigte Menschen (mehrere auswählbar)" />
+                    v-model="formPayload.textsFiles"
+                    display-name="Texte für hörgeschädigte Menschen (mehrere auswählbar)" />
 
                 <CheckboxInput v-model="formPayload.introduction"
                     display-name='Ich möchte auf Instagram (@saferspace_slam) und auf saferspace-slam.de angekündigt werden.' />
@@ -157,7 +171,8 @@ console.log({ slams, futureSlams, slamDates })
                         placeholder="Dein Instagram Account Name" type="text" />
                     <TextAreaInput required v-model="formPayload.aboutMe" display-name="Über dich"
                         placeholder="Der Text, mit dem wir dich ankündigen. Du kannst hier gerne den Über-dich Text aus deiner Anmeldung wiederverwenden." />
-                    <FileInput required :file-types="['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/mpeg']"
+                    <FileInput required
+                        :file-types="['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/mpeg']"
                         v-model="formPayload.pictures" display-name="Foto / Video für die Ankündigung" />
                 </template>
             </Form>

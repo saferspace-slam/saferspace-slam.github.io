@@ -47,12 +47,11 @@ async function checkValidity() {
                             diesen Fehler hin.</p>
                     </div>
                     <div v-if="form.status.value == 'clientError'" class="text-red-700 flex justify-center">
-                        <p class="text-red-700">Fehler beim Senden. Überprüfe deine
-                            Internetverbindung
-                            und versuche es später
-                            nochmal.</p>
+                        <p class="text-red-700">Fehler beim Senden. Überprüfe deine Internetverbindung und versuche es
+                            später nochmal.
+                        </p>
                     </div>
-                    <div v-if="form.status.value == 'invalid'" class="text-red-700 flex justify-center">
+                    <div v-if="form.status.value == 'invalid'" class="text-red-700 flex justify-center text-center">
                         <p class="text-red-700">Nicht alle notwendigen Felder sind ausgefüllt</p>
                     </div>
                 </div>
