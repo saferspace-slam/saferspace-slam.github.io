@@ -5,6 +5,17 @@ const { form } = defineProps<{
     form: FormData<any>
 }>();
 
+const progressBar = useTemplateRef('progressBar');
+watch(form.progress, () => {
+    if (form.progress.value) {
+        progressBar.value!.style.translate = `-${(1 - form.progress.value) * 100}%`
+    }
+    else {
+        progressBar.value!.style.translate = ""
+
+    }
+})
+
 </script>
 
 <template>
@@ -31,6 +42,9 @@ const { form } = defineProps<{
                             und versuche es später
                             nochmal.</p>
                     </div>
+                </div>
+                <div v-show="form.progress.value" class="rounded-full overflow-hidden mx-2">
+                    <div ref="progressBar" class="w-full h-2 bg-green-700"></div>
                 </div>
                 <button type="submit"
                     class="flex gap-2 justify-center cursor-pointer rounded-lg bg-menu-background text-white py-3 px-4">

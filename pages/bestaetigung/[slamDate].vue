@@ -7,7 +7,7 @@ import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
-import FileInput, { type FileInfo } from '~/components/forms/FileInput.vue';
+import FileInput, { } from '~/components/forms/FileInput.vue';
 import { computeData, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
 import { setSeo } from '~/helpers';
@@ -31,9 +31,9 @@ type Data = {
     aboutMe: string,
     introduction: boolean,
     introductionText: string,
-    pictures: FileInfo[],
+    pictures: File[],
     dontIncludeTexts: boolean,
-    texts: FileInfo[],
+    texts: File[],
 }
 
 function emptyData(): Data {
@@ -56,39 +56,32 @@ function generatePayload(data: Data): Payload {
     return {
         name: data.name,
         email: "",
-        subject: `Bestätigung ${slamDate}`,
+        subject: slamDate,
         message: `
-Name: ${data.name}
-Stage Name: ${data.stageName}
-Pronomen: ${data.pronouns ?? "Keine"}
-Inhaltliche Warnungen: ${data.contentWarnings}
-Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}
-Texte für Hörgeschädigte: ${data.dontIncludeTexts ? "Nein" : "Ja"}
+Name: ${data.name}<br>
+Stage Name: ${data.stageName}<br>
+Pronomen: ${data.pronouns ?? "Keine"}<br>
+Inhaltliche Warnungen: ${data.contentWarnings}<br>
+Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}<br>
+Texte für Hörgeschädigte: ${data.dontIncludeTexts ? "Nein" : "Ja"}<br>
 ${data.introduction ?
-                `Instagram: ${data.instagram ?? "Keins"}
+                `Instagram: ${data.instagram ?? "Keins"}<br>
 Über mich: ${data.aboutMe}`
                 : ''}
                 `,
         files: [
-            ...data.pictures.map((pic, i) => {
+            ...(data.pictures.length ? [{ name: `${data.name} Foto/Video - ${data.pictures[0].name}`, file: data.pictures[0] }] : []),
+            ...data.texts.map((file, i) => {
                 return {
-                    data: pic.data,
-                    filename: `Foto ${i + 1} - ${pic.filename}`,
-                    type: pic.type,
-                }
-            }),
-            ...data.texts.map((text, i) => {
-                return {
-                    data: text.data,
-                    filename: `Text ${i + 1} - ${text.filename}`,
-                    type: text.type,
+                    name: `${data.name} Text ${i + 1} - ${file.name}`,
+                    file,
                 }
             })
         ]
     }
 }
 
-const form = new FormData<PayloadGenerator<Data>, Data>("Bestätigen", { data: emptyData(), generatePayload, emptyData });
+const form = new FormData<PayloadGenerator<Data>, Data>("Bestätigung", { data: emptyData(), generatePayload, emptyData });
 const formPayload = form.payload.value.data;
 
 const slamDates = computed(() => futureSlams.value.map(s => s.date.toLocaleDateString("de")));
@@ -164,7 +157,7 @@ console.log({ slams, futureSlams, slamDates })
                         placeholder="Dein Instagram Account Name" type="text" />
                     <TextAreaInput required v-model="formPayload.aboutMe" display-name="Über dich"
                         placeholder="Der Text, mit dem wir dich ankündigen. Du kannst hier gerne den Über-dich Text aus deiner Anmeldung wiederverwenden." />
-                    <FileInput required :file-types="['image/jpeg', 'image/png', 'image/webp']"
+                    <FileInput required :file-types="['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/mpeg']"
                         v-model="formPayload.pictures" display-name="Foto / Video für die Ankündigung" />
                 </template>
             </Form>

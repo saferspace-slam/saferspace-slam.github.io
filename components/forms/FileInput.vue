@@ -5,44 +5,18 @@ const props = defineProps<{
     multiple?: boolean,
     required?: boolean,
 }>();
-const value = defineModel<FileInfo[]>({ required: true });
-
-export type FileInfo = {
-    filename: string,
-    type: string,
-    data: string,
-    size: number,
-}
-
-function loadFile(file: File) {
-    return new Promise<FileInfo>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            const result = reader.result as string;
-            // result is of format: data:image/png;base64,<DATA>
-
-            const dataStart = result.indexOf(",") + 1;
-
-            const data = result.slice(dataStart);
-
-            resolve({ type: file.type, data, filename: file.name, size: file.size })
-        };
-        reader.onerror = reject;
-    });
-}
+const value = defineModel<File[]>({ required: true });
 
 async function updateFile(event: Event) {
-    const files = (event.target! as HTMLInputElement).files ?? [];
-    const fileInfos = [];
-    console.log({ files });
+    const fileList = (event.target! as HTMLInputElement).files ?? [];
+    const files = [];
 
-    for (const file of files) {
-        fileInfos.push(await loadFile(file))
+    for (const file of fileList) {
+        files.push(file)
     }
-    value.value = fileInfos;
+    value.value = files;
 
-    console.log({ fileStrings: fileInfos });
+    console.log({ files });
 }
 
 </script>
