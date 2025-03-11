@@ -16,11 +16,21 @@ watch(form.progress, () => {
     }
 })
 
+const htmlForm = useTemplateRef("htmlForm");
+
+async function checkValidity() {
+    if (!htmlForm.value?.reportValidity()) {
+        form.status.value = 'invalid';
+    } else {
+        form.status.value = undefined;
+    }
+}
+
 </script>
 
 <template>
     <div>
-        <form @submit.prevent="form.send"
+        <form ref="htmlForm" @submit.prevent="form.send"
             class="flex flex-col gap-2 bg-white sm:px-6 px-4 sm:pt-4 pt-2 sm:pb-6 pb-4 rounded-xl shadow-lg shadow-black/20">
 
             <slot></slot>
@@ -42,11 +52,14 @@ watch(form.progress, () => {
                             und versuche es später
                             nochmal.</p>
                     </div>
+                    <div v-if="form.status.value == 'invalid'" class="text-red-700 flex justify-center">
+                        <p class="text-red-700">Nicht alle notwendigen Felder sind ausgefüllt</p>
+                    </div>
                 </div>
                 <div v-show="form.progress.value" class="rounded-full overflow-hidden mx-2">
                     <div ref="progressBar" class="w-full h-2 bg-green-700"></div>
                 </div>
-                <button type="submit"
+                <button type="submit" @click="checkValidity"
                     class="flex gap-2 justify-center cursor-pointer rounded-lg bg-menu-background text-white py-3 px-4">
                     <span v-show="form.status.value == 'sending'" class="absolute -translate-x-13">
                         <img src="@/assets/progress.svg" class="invert animate-spin" />

@@ -16,7 +16,7 @@ export type PayloadGenerator<T> = {
 
 type PayloadOrGenerator<T = {}> = Payload | PayloadGenerator<T>;
 
-export type FormStatus = "success" | "clientError" | "serverErrror" | "sending" | undefined;
+export type FormStatus = "success" | "clientError" | "serverErrror" | "sending" | "invalid" | undefined;
 
 export function emptyFormPayload(): Payload {
     return {
