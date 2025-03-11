@@ -166,11 +166,12 @@ export class FormData<P extends PayloadOrGenerator<T>, T extends {} = {}> {
                                     if (xhr.status === 200) {
                                         console.log(`Uploaded ${name}`);
                                         start = end;
+                                        tries = 0;
                                         resolve()
                                     } else if (xhr.status === 308) {
                                         const rangeHeader = xhr.getResponseHeader('Range')!;
                                         start = parseInt(rangeHeader.split('-')[1]) + 1;
-
+                                        tries = 0;
                                         resolve()
                                     } else {
                                         reject(`Upload failed: ${xhr.status} ${xhr.response}`)
