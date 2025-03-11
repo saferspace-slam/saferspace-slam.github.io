@@ -20,8 +20,8 @@ const id = crypto.randomUUID();
                 {{ props.optionFalse }}
             </span>
         </label>
-        <div class="cursor-pointer bg-gray-700 rounded-full w-10 min-w-10 h-5" @click="value = !value">
-            <div class="h-5 w-5 bg-white rounded-full border-3 border-gray-700 transition-all duration-100"
+        <div class="cursor-pointer bg-menu-background rounded-full w-10 min-w-10 h-5" @click="value = !value">
+            <div class="h-5 w-5 bg-white rounded-full border-3 border-menu-background transition-all duration-100"
                 :class="{ 'ml-5': value }"></div>
         </div>
         <label class="text-left flex my-4 items-center gap-1 cursor-pointer">
