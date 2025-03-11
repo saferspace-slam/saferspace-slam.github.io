@@ -26,7 +26,7 @@ async function updateFile(event: Event) {
         <span class="text-xs ml-2 text-gray-500" :class="{ 'form-label-required': props.required }">
             {{ props.displayName }}
         </span>
-        <input class="cursor-pointer p-2" :required="props.required" @change="updateFile($event)"
+        <input class="cursor-pointer p-2 w-full" :required="props.required" @change="updateFile($event)"
             :accept="props.fileTypes.join(',')" :multiple="props.multiple" type="file" />
     </label>
 </template>
