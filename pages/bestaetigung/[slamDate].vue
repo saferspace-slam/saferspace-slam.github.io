@@ -57,16 +57,16 @@ function generatePayload(data: Data): Payload {
         name: data.name,
         email: "",
         subject: slamDate,
-        message: `
-Name: ${data.name}<br>
-Stage Name: ${data.stageName}<br>
-Pronomen: ${data.pronouns ?? "Keine"}<br>
-Inhaltliche Warnungen: ${data.contentWarnings}<br>
-Zustimmung Ankündigung: ${data.introduction ? "Ja" : "Nein"}<br>
-Texte für Hörgeschädigte: ${data.dontIncludeTexts ? "Nein" : "Ja"}<br>
+        message: `<br><br>
+Name: <strong>${data.name}</strong><br>
+Stage Name: <strong>${data.stageName || "Keiner"}</strong><br>
+Pronomen: <strong>${data.pronouns || "Keine"}</strong><br>
+Inhaltliche Warnungen: <strong>${data.contentWarnings}</strong><br>
+Zustimmung Ankündigung: <strong>${data.introduction ? "Ja" : "Nein"}</strong><br>
+Texte für Hörgeschädigte: <strong>${data.dontIncludeTexts ? "Nein" : "Ja"}</strong><br>
 ${data.introduction ?
-                `Instagram: ${data.instagram ?? "Keins"}<br>
-Über mich: ${data.aboutMe}`
+                `Instagram: <strong>${data.instagram || "Keins"}</strong><br>
+Über mich: <strong>${data.aboutMe}</strong>`
                 : ''}
                 `,
         files: [
