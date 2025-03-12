@@ -5,6 +5,7 @@ export type Payload = {
     email: string,
     subject: string,
     message: string,
+    uploadAllFiles?: boolean,
     files: { name: string, file: File }[],
 }
 
@@ -79,7 +80,7 @@ export class FormData<P extends PayloadOrGenerator<T>, T extends {} = {}> {
         let filesToAttach = payload.files.sort((a, b) => b.file.size - a.file.size); // sort descending
         let filesToUpload = [];
 
-        while (filesToAttach.map(f => f.file.size).reduce((partialSum, a) => partialSum + a, 0) >= 10_000_000) {
+        while ((payload.uploadAllFiles && filesToAttach.length) || filesToAttach.map(f => f.file.size).reduce((partialSum, a) => partialSum + a, 0) >= 10_000_000) {
             filesToUpload.push(filesToAttach.splice(0, 1)[0]);
         }
 
