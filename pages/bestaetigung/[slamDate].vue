@@ -166,9 +166,9 @@ console.log({ slams, futureSlams, slamDates })
                     v-model="formPayload.textsFiles"
                     display-name="Texte für hörgeschädigte Menschen (mehrere auswählbar)" />
 
-                <BooleanRadioButtonsInput option-false="Ich stimme nicht zu." option-true="Ich stimme zu."
-                    v-model="formPayload.photoConsent" display-name="Dürfen wir Fotos und Videos von dir aufnehmen?"
-                    details="Wir veröffentlichen nichts ohne nochmal nachzufragen!" required />
+                <BooleanRadioButtonsInput option-false="Nein, ich stimme nicht zu" option-true="Ja, ich stimme zu"
+                    v-model="formPayload.photoConsent" :display-name="`Dürfen wir während des Slams Fotos und Videos von dir aufnehmen?`"
+                    details="Wir veröffentlichen nichts ohne dein Einverständnis!" required />
 
                 <CheckboxInput v-model="formPayload.introduction"
                     display-name='Ich möchte auf Instagram (@saferspace_slam) und auf saferspace-slam.de angekündigt werden.' />

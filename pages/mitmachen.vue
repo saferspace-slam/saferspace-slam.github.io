@@ -93,8 +93,8 @@ console.log({ slams, futureSlams, slamDates })
                     placeholder="Deine Email-Adresse" type="text" />
                 <TextInput v-model="formPayload.phone" display-name="Handynummer (optional, aber hilfreich)"
                     placeholder="Deine Handynummer" type="text" />
-                <SelectMultipleInput required v-model="formPayload.possibleDates" display-name="Mögliche Daten"
-                    :options="slamDates" details="Wann könntest du auftreten?" />
+                <SelectMultipleInput required v-model="formPayload.possibleDates"
+                    :options="slamDates" display-name="Wann könntest du auftreten?" />
                 <SelectInput required v-model="formPayload.preferredDate" display-name="Lieblingsdatum"
                     placeholder="Wann möchtest du am liebsten auftreten?" :options="slamDates" />
 

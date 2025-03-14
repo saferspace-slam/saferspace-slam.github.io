@@ -15,7 +15,7 @@ value.value = props.placeholder;
         <span class="text-xs ml-2 text-gray-500" :class="{ 'form-label-required': props.required }">
             {{ props.displayName }}
         </span>
-        <select class="border-b-1 border-gray-400 p-2" :class="{ 'text-current/50': value == placeholder }"
+        <select class="border-b-1 border-gray-400 p-2 w-full" :class="{ 'text-current/50': value == placeholder }"
             v-model="value" :required="props.required">
             <option disabled selected>{{ placeholder }}</option>
             <option v-for="option in options">{{ option }}</option>
