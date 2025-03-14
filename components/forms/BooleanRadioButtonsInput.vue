@@ -14,7 +14,7 @@ const id = crypto.randomUUID();
 </script>
 
 <template>
-    <fieldset class="border-1 border-menu-background px-4 my-4">
+    <fieldset class="border-1 border-gray-500 px-4 my-4">
         <legend class="text-gray-500 px-2" :class="{'form-label-required': props.required}">{{ props.displayName }}</legend>
         <div class="flex flex-col gap-2 mx-1 mt-3 mb-4">
             <p v-if="props.details" class="text-red-500 mb-2 text-xs">{{ props.details }}</p>
