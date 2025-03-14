@@ -6,6 +6,7 @@ import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
+import BooleanRadioButtonsInput from '~/components/forms/BooleanRadioButtonsInput.vue';
 import FileInput from '~/components/forms/FileInput.vue';
 import ToggleInput from '~/components/forms/ToggleInput.vue';
 import { computeData, slams } from '~/data';
@@ -34,6 +35,7 @@ type Data = {
     pictures: File[],
     dontIncludeTexts: boolean,
     textsUploadFiles: boolean,
+    photoConsent: boolean | undefined,
     textsText: string,
     textsFiles: File[],
 }
@@ -51,6 +53,7 @@ function emptyData(): Data {
         pictures: [],
         dontIncludeTexts: false,
         textsUploadFiles: true,
+        photoConsent: undefined,
         textsText: "",
         textsFiles: [],
     }
@@ -67,6 +70,7 @@ Stage Name: <strong>${data.stageName || "Keiner"}</strong><br>
 Pronomen: <strong>${data.pronouns || "Keine"}</strong><br>
 Inhaltliche Warnungen: <strong>${data.contentWarnings}</strong><br>
 Zustimmung Ankündigung: <strong>${data.introduction ? "Ja" : "Nein"}</strong><br>
+Zustimmung Fotos/Videos: <strong>${data.photoConsent ? "Ja" : "Nein"}</strong><br>
 Texte für Hörgeschädigte: <strong>${data.dontIncludeTexts ? "Nein" : "Ja"}${!data.textsUploadFiles ? `<br><br>${data.textsText}` : ''}</strong><br>
 
 ${data.introduction ?
@@ -150,8 +154,8 @@ console.log({ slams, futureSlams, slamDates })
                 <CheckboxInput v-model="formPayload.dontIncludeTexts"
                     display-name='Ich möchte meine Texte *nicht* für hörgeschädigte Menschen bereitstellen.' />
 
-                <ToggleInput v-if="!formPayload.dontIncludeTexts" v-model="formPayload.textsUploadFiles" option-false='Texte reinkopieren'
-                    option-true="Texte als Dateien hochladen" />
+                <ToggleInput v-if="!formPayload.dontIncludeTexts" v-model="formPayload.textsUploadFiles"
+                    option-false='Texte reinkopieren' option-true="Texte als Dateien hochladen" />
 
                 <TextAreaInput v-if="!formPayload.dontIncludeTexts && !formPayload.textsUploadFiles" required
                     v-model="formPayload.textsText" display-name="Texte für hörgeschädigte Menschen"
@@ -161,6 +165,10 @@ console.log({ slams, futureSlams, slamDates })
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
                     v-model="formPayload.textsFiles"
                     display-name="Texte für hörgeschädigte Menschen (mehrere auswählbar)" />
+
+                <BooleanRadioButtonsInput option-false="Ich stimme nicht zu." option-true="Ich stimme zu."
+                    v-model="formPayload.photoConsent" display-name="Dürfen wir Fotos und Videos von dir aufnehmen?"
+                    details="Wir veröffentlichen nichts ohne nochmal nachzufragen!" required />
 
                 <CheckboxInput v-model="formPayload.introduction"
                     display-name='Ich möchte auf Instagram (@saferspace_slam) und auf saferspace-slam.de angekündigt werden.' />

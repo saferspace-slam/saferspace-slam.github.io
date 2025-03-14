@@ -6,6 +6,7 @@ import SelectInput from '@/components/forms/SelectInput.vue';
 import TextAreaInput from '@/components/forms/TextAreaInput.vue';
 import TextInput from '@/components/forms/TextInput.vue';
 import PageHeading from '@/components/PageHeading.vue';
+import SelectMultipleInput from '~/components/forms/SelectMultipleInput.vue';
 import { computeData, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
 import { setSeo } from '~/helpers';
@@ -22,7 +23,8 @@ type Data = {
     email: string,
     phone: string,
     aboutMe: string,
-    slamDate: string,
+    preferredDate: string,
+    possibleDates: string[],
     travelExpenses: boolean,
 }
 
@@ -32,7 +34,8 @@ function emptyData(): Data {
         email: "",
         phone: "",
         aboutMe: "",
-        slamDate: "",
+        preferredDate: "",
+        possibleDates: [],
         travelExpenses: false,
     }
 }
@@ -41,13 +44,14 @@ function generatePayload(data: Data): Payload {
     return {
         name: data.name,
         email: data.email,
-        subject: `Anmeldung ${new Date(data.slamDate).toLocaleDateString('de')}`,
+        subject: `Anmeldung ${data.preferredDate}`,
         message: `
-Slam-Datum: ${data.slamDate}
-Fahrtkosten: ${data.travelExpenses ? 'Ja' : 'Nein'}
-Email: ${data.email}
-Handynummer: ${data.phone ?? 'Keine'}
-Über mich: ${data.aboutMe}`,
+Lieblings-Datum: <strong>${data.preferredDate}</strong><br>
+Mögliche Daten: <strong>${data.possibleDates.join(", ")}</strong><br>
+Fahrtkosten: <strong>${data.travelExpenses ? 'Ja' : 'Nein'}</strong><br>
+Email: <strong>${data.email}</strong><br>
+Handynummer: <strong>${data.phone || 'Keine'}</strong><br>
+Über mich: <strong>${data.aboutMe}</strong>`,
         files: [],
     }
 }
@@ -55,7 +59,7 @@ Handynummer: ${data.phone ?? 'Keine'}
 const form = new FormData<PayloadGenerator<Data>, Data>("Mitmachen", { data: emptyData(), generatePayload, emptyData });
 const formPayload = form.payload.value.data;
 
-const slamDates = computed(() => futureSlams.value.filter(s => s.open).map(s => s.date.toLocaleDateString("de")));
+const slamDates = computed(() => futureSlams.value.filter(s => s.open).slice(0, 5).map(s => s.date.toLocaleDateString("de")));
 console.log({ slams, futureSlams, slamDates })
 </script>
 
@@ -89,8 +93,12 @@ console.log({ slams, futureSlams, slamDates })
                     placeholder="Deine Email-Adresse" type="text" />
                 <TextInput v-model="formPayload.phone" display-name="Handynummer (optional, aber hilfreich)"
                     placeholder="Deine Handynummer" type="text" />
-                <SelectInput required v-model="formPayload.slamDate" display-name="Slam-Datum"
-                    placeholder="Wann möchtest du auftreten?" :options="slamDates" />
+                <SelectMultipleInput required v-model="formPayload.possibleDates" display-name="Mögliche Daten"
+                    :options="slamDates" details="Wann könntest du auftreten?" />
+                <SelectInput required v-model="formPayload.preferredDate" display-name="Lieblingsdatum"
+                    placeholder="Wann möchtest du am liebsten auftreten?" :options="slamDates" />
+
+
                 <TextAreaInput required v-model="formPayload.aboutMe" display-name="Über dich"
                     placeholder="Erzähl uns gerne ein bisschen was über dich! Was für Texte schreibst du? Wäre das dein erster Slam oder dein hundertster Auftritt? Was motiviert dich zum Schreiben?" />
                 <CheckboxInput v-model="formPayload.travelExpenses"
