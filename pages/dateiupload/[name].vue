@@ -1,15 +1,8 @@
 <script setup lang="ts">
 import Content from '@/components/Content.vue';
-import CheckboxInput from '@/components/forms/CheckboxInput.vue';
 import Form from '@/components/forms/Form.vue';
-import SelectInput from '@/components/forms/SelectInput.vue';
-import TextAreaInput from '@/components/forms/TextAreaInput.vue';
-import TextInput from '@/components/forms/TextInput.vue';
-import InstagramInline from '@/components/InstagramInline.vue';
 import PageHeading from '@/components/PageHeading.vue';
 import FileInput, { } from '~/components/forms/FileInput.vue';
-import ToggleInput from '~/components/forms/ToggleInput.vue';
-import { computeData, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
 import { setSeo } from '~/helpers';
 
