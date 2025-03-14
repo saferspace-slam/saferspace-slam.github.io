@@ -57,7 +57,7 @@ Handynummer: ${data.phone ?? 'Keine'}
 const form = new FormData<PayloadGenerator<Data>, Data>("Mitmachen", { data: emptyData(), generatePayload, emptyData });
 const formPayload = form.payload.value.data;
 
-const slamDates = computed(() => futureSlams.value.map(s => s.date.toLocaleDateString("de")));
+const slamDates = computed(() => futureSlams.value.filter(s => s.open).map(s => s.date.toLocaleDateString("de")));
 console.log({ slams, futureSlams, slamDates })
 </script>
 
