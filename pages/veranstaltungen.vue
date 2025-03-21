@@ -64,7 +64,7 @@ const activePage: Ref<"future" | "past"> = ref("future");
             </div>
             <div v-if="activePage == 'future'" class="px-6">
                 <div v-for="slam in futureSlams" class="not-first:border-t-1 border-black/30 py-6">
-                    <div class="flex flex-col lg:flex-row gap-4  justify-between">
+                    <div class="flex flex-col lg:flex-row gap-4 justify-between">
                         <div class="flex flex-col gap-2">
                             <div class="flex items-center gap-2">
                                 <span class="material-symbols-outlined">
