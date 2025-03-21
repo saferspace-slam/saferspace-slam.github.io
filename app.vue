@@ -82,18 +82,22 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
 <template>
   <div class="flex flex-col justify-between min-h-screen" @click="navActive = false">
     <header class="z-50 w-full top-0 flex justify-center" :class="{ 'fixed': onHome, 'sticky': !onHome }">
-      <div class="absolute shadow-md shadow-black/30 -z-10 inset-0 lg:bg-linear-to-r from-theme-1 to-theme-2"
-        :class="{ 'not-hover:lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading }"></div>
+      <div class="absolute lg:shadow-md lg:shadow-black/30 -z-10 inset-0 lg:bg-linear-to-r from-theme-1 to-theme-2"
+        :class="{ 'not-hover:lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading, 'lg:bg-none lg:bg-gray-950': onHome }">
+      </div>
       <div class="w-full flex justify-between max-w-[1200px] lg:items-center flex-col lg:flex-row"
         :class="{ 'lg:py-5': store.scrolled, 'lg:py-7': !store.scrolled, 'transition-all ease-in-out duration-500': !loading }">
 
         <div class="relative z-10 gap-6 pr-5 lg:pl-5 pl-7 flex justify-between items-center w-full"
           :class="{ 'not-lg:py-4': store.scrolled, 'not-lg:py-6': !store.scrolled, 'transition-all duration-500': !loading }">
-          <div class="absolute -z-50 inset-0 not-lg:bg-linear-to-r from-theme-1 to-theme-2"
-            :class="{ 'not-hover:not-lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading }"></div>
+          <div
+            class="absolute -z-50 inset-0 not-lg:shadow-md not-lg:shadow-black/30 not-lg:bg-linear-to-r from-theme-1 to-theme-2"
+            :class="{ 'not-hover:not-lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading, 'not-lg:bg-none not-lg:bg-gray-950': onHome }">
+          </div>
 
           <NuxtLink to="/">
-            <svg class="h-5 text-theme-foreground font-medium transition-colors duration-500" :class="{'text-white!': darkenNav}" width="100%" height="100%" viewBox="0 0 478 36" version="1.1"
+            <svg class="h-5 text-theme-foreground font-medium transition-colors duration-500"
+              :class="{ 'text-white!': darkenNav }" width="100%" height="100%" viewBox="0 0 478 36" version="1.1"
               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
               xmlns:serif="http://www.serif.com/"
               style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -157,7 +161,7 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
 
         <nav ref="mobileNav"
           class="h-full py-7 px-5 gap-7 justify-end flex-col flex bg-linear-to-r from-theme-1 to-theme-2" :class="{
-            '!flex opacity-100': navActive, 'opacity-0': !navActive, 'lg:hidden transition-all duration-500': !loading
+            '!flex opacity-100': navActive, 'opacity-0': !navActive, 'lg:hidden transition-all duration-500': !loading, 'not-lg:bg-none not-lg:bg-gray-950': onHome
           }">
           <NuxtLink v-for="route in routes" :class="menuItemClasses" :to="route[0]" @click="navActive = false">{{
             route[1] }}</NuxtLink>
@@ -165,7 +169,8 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
             @click="navActive = false">
             <div class="flex gap-[10px] items-center">
               <!-- <img src="~/assets/instagram_logo_simple.svg" class="h-5 ml-[2px] invert" /> -->
-              <svg class="h-5 ml-[2px] text-theme-foreground transition-colors duration-500" :class="{'text-white!': darkenNav}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <svg class="h-5 ml-[2px] text-theme-foreground transition-colors duration-500"
+                :class="{ 'text-white!': darkenNav }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path style="fill:currentColor"
                   d="M256,49.471c67.266,0,75.233.257,101.8,1.469,24.562,1.121,37.9,5.224,46.778,8.674a78.052,78.052,0,0,1,28.966,18.845,78.052,78.052,0,0,1,18.845,28.966c3.45,8.877,7.554,22.216,8.674,46.778,1.212,26.565,1.469,34.532,1.469,101.8s-0.257,75.233-1.469,101.8c-1.121,24.562-5.225,37.9-8.674,46.778a83.427,83.427,0,0,1-47.811,47.811c-8.877,3.45-22.216,7.554-46.778,8.674-26.56,1.212-34.527,1.469-101.8,1.469s-75.237-.257-101.8-1.469c-24.562-1.121-37.9-5.225-46.778-8.674a78.051,78.051,0,0,1-28.966-18.845,78.053,78.053,0,0,1-18.845-28.966c-3.45-8.877-7.554-22.216-8.674-46.778-1.212-26.564-1.469-34.532-1.469-101.8s0.257-75.233,1.469-101.8c1.121-24.562,5.224-37.9,8.674-46.778A78.052,78.052,0,0,1,78.458,78.458a78.053,78.053,0,0,1,28.966-18.845c8.877-3.45,22.216-7.554,46.778-8.674,26.565-1.212,34.532-1.469,101.8-1.469m0-45.391c-68.418,0-77,.29-103.866,1.516-26.815,1.224-45.127,5.482-61.151,11.71a123.488,123.488,0,0,0-44.62,29.057A123.488,123.488,0,0,0,17.3,90.982C11.077,107.007,6.819,125.319,5.6,152.134,4.369,179,4.079,187.582,4.079,256S4.369,333,5.6,359.866c1.224,26.815,5.482,45.127,11.71,61.151a123.489,123.489,0,0,0,29.057,44.62,123.486,123.486,0,0,0,44.62,29.057c16.025,6.228,34.337,10.486,61.151,11.71,26.87,1.226,35.449,1.516,103.866,1.516s77-.29,103.866-1.516c26.815-1.224,45.127-5.482,61.151-11.71a128.817,128.817,0,0,0,73.677-73.677c6.228-16.025,10.486-34.337,11.71-61.151,1.226-26.87,1.516-35.449,1.516-103.866s-0.29-77-1.516-103.866c-1.224-26.815-5.482-45.127-11.71-61.151a123.486,123.486,0,0,0-29.057-44.62A123.487,123.487,0,0,0,421.018,17.3C404.993,11.077,386.681,6.819,359.866,5.6,333,4.369,324.418,4.079,256,4.079h0Z" />
                 <path style="fill:currentColor"
@@ -179,12 +184,14 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
 
         <nav class="not-lg:hidden h-full px-5 gap-7 justify-end flex-row flex items-center"
           :class="{ 'duration-500 transition-all': !loading }">
-          <NuxtLink v-for="route in routes" :class="[menuItemClasses, {'text-white': darkenNav}]" :to="route[0]" @click="navActive = false">{{
-            route[1] }}</NuxtLink>
+          <NuxtLink v-for="route in routes" :class="[menuItemClasses, { 'text-white': darkenNav }]" :to="route[0]"
+            @click="navActive = false">{{
+              route[1] }}</NuxtLink>
           <a :class="menuItemClasses" href="https://www.instagram.com/saferspace_slam/" target="_blank"
             @click="navActive = false">
             <!-- <img src="~/assets/instagram_logo_simple.svg" class="h-5 mr-5 invert" /> -->
-            <svg class="h-5 mr-5 text-theme-foreground transition-colors duration-500" :class="{'text-white!': darkenNav}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <svg class="h-5 mr-5 text-theme-foreground transition-colors duration-500"
+              :class="{ 'text-white!': darkenNav }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path style="fill:currentColor"
                 d="M256,49.471c67.266,0,75.233.257,101.8,1.469,24.562,1.121,37.9,5.224,46.778,8.674a78.052,78.052,0,0,1,28.966,18.845,78.052,78.052,0,0,1,18.845,28.966c3.45,8.877,7.554,22.216,8.674,46.778,1.212,26.565,1.469,34.532,1.469,101.8s-0.257,75.233-1.469,101.8c-1.121,24.562-5.225,37.9-8.674,46.778a83.427,83.427,0,0,1-47.811,47.811c-8.877,3.45-22.216,7.554-46.778,8.674-26.56,1.212-34.527,1.469-101.8,1.469s-75.237-.257-101.8-1.469c-24.562-1.121-37.9-5.225-46.778-8.674a78.051,78.051,0,0,1-28.966-18.845,78.053,78.053,0,0,1-18.845-28.966c-3.45-8.877-7.554-22.216-8.674-46.778-1.212-26.564-1.469-34.532-1.469-101.8s0.257-75.233,1.469-101.8c1.121-24.562,5.224-37.9,8.674-46.778A78.052,78.052,0,0,1,78.458,78.458a78.053,78.053,0,0,1,28.966-18.845c8.877-3.45,22.216-7.554,46.778-8.674,26.565-1.212,34.532-1.469,101.8-1.469m0-45.391c-68.418,0-77,.29-103.866,1.516-26.815,1.224-45.127,5.482-61.151,11.71a123.488,123.488,0,0,0-44.62,29.057A123.488,123.488,0,0,0,17.3,90.982C11.077,107.007,6.819,125.319,5.6,152.134,4.369,179,4.079,187.582,4.079,256S4.369,333,5.6,359.866c1.224,26.815,5.482,45.127,11.71,61.151a123.489,123.489,0,0,0,29.057,44.62,123.486,123.486,0,0,0,44.62,29.057c16.025,6.228,34.337,10.486,61.151,11.71,26.87,1.226,35.449,1.516,103.866,1.516s77-.29,103.866-1.516c26.815-1.224,45.127-5.482,61.151-11.71a128.817,128.817,0,0,0,73.677-73.677c6.228-16.025,10.486-34.337,11.71-61.151,1.226-26.87,1.516-35.449,1.516-103.866s-0.29-77-1.516-103.866c-1.224-26.815-5.482-45.127-11.71-61.151a123.486,123.486,0,0,0-29.057-44.62A123.487,123.487,0,0,0,421.018,17.3C404.993,11.077,386.681,6.819,359.866,5.6,333,4.369,324.418,4.079,256,4.079h0Z" />
               <path style="fill:currentColor"

@@ -5,9 +5,9 @@
     font-weight: 400;
 }
 
-.link-colorize {
+/* .link-colorize {
     filter: invert(15%) sepia(45%) saturate(3028%) hue-rotate(302deg) brightness(95%) contrast(97%);
-}
+} */
 
 .form-label-required:after {
     content: " *";

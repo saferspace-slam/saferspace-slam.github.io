@@ -15,7 +15,7 @@
   --color-menu-background: color-mix(in oklab, var(--color-theme-1), var(--color-theme-2));
   --color-menu-item: white;
   --color-background: color-mix(in oklab, var(--color-menu-background) 5%, transparent);
-  --color-link: #7a1b4c;
+  --color-link: color-mix(in oklab, var(--color-menu-background) 90%, black)/* #7a1b4c */;
 }
 
 .bg-menu-background {

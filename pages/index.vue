@@ -6,18 +6,23 @@ import PageHeading from '~/components/PageHeading.vue';
 import { ref } from 'vue';
 import { useStore } from '~/store';
 import { setSeo } from '~/helpers';
+import { computeData } from '~/data';
 
 setSeo(
   "Saferspace Slam",
   "Queerer Poetry Slam in Hamburg, jeden 3. Mittwoch im Monat um 20 Uhr"
 );
 
+const { nextSlam } = computeData();
+
+const backgroundPicture = computed(() => `/${nextSlam.value?.homePicture ?? 'home.jpg'}`);
+
 const store = useStore();
 const startOfContent = ref();
 </script>
 
 <template>
-  <img src="~/assets/home.jpg" class="h-screen w-screen object-cover object-[50%_32%]">
+  <img :src="backgroundPicture" class="h-screen w-screen object-cover object-[50%_32%]">
   <div class="absolute top-0 h-screen w-full flex flex-col justify-center">
     <div class="flex justify-center m-5">
       <div class="flex flex-col items-center">
