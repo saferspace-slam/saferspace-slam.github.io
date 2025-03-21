@@ -209,7 +209,7 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
       <NuxtPage />
     </main>
 
-    <footer class="text-sm bg-black/90 p-10 !text-white flex lg:justify-center">
+    <footer class="text-sm bg-gray-950 p-10 !text-white flex lg:justify-center">
       <div class="flex flex-col gap-4 lg:gap-12 lg:flex-row">
         <a class="text-white" href="https://www.instagram.com/saferspace_slam/" target="_blank">
           <div class="flex gap-[14px] items-center">
