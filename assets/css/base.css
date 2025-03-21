@@ -1,10 +1,23 @@
 @import "tailwindcss";
 
+* {
+  /* --theme-color-1: #ff5757;
+  --theme-color-2: #8c52ff; */
+
+}
+
 @theme {
+  --color-theme-1: #ff5757;
+  --color-theme-2: #8c52ff;
+  --color-theme-foreground: white;
   --color-normal-text: black;
   --color-special-text: var(--color-green-800);
-  --color-menu-background: #1c050d;
+  --color-menu-background: color-mix(in oklab, var(--color-theme-1), var(--color-theme-2));
   --color-menu-item: white;
-  --color-background: #f4ebee;
+  --color-background: color-mix(in oklab, var(--color-menu-background) 5%, transparent);
   --color-link: #7a1b4c;
+}
+
+.bg-menu-background {
+  background: linear-gradient(90deg, var(--color-theme-1) 0%, var(--color-theme-2) 100%);
 }

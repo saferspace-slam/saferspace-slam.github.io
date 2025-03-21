@@ -59,7 +59,7 @@ async function checkValidity() {
                     <div ref="progressBar" class="w-full h-2 bg-green-700"></div>
                 </div>
                 <button type="submit" @click="checkValidity"
-                    class="flex gap-2 justify-center cursor-pointer rounded-lg bg-menu-background text-white py-3 px-4">
+                    class="flex gap-2 justify-center cursor-pointer rounded-lg text-theme-foreground bg-linear-to-r from-theme-1 to-theme-2 py-3 px-4">
                     <span v-show="form.status.value == 'sending'" class="absolute -translate-x-13">
                         <img src="@/assets/progress.svg" class="invert animate-spin" />
                     </span>
