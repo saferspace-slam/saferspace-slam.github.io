@@ -76,14 +76,14 @@ onMounted(() => {
   }, 1)
 });
 
-const menuItemClasses = "transition-all duration-500 text-theme-foreground hover:opacity-80 outline-hover"
+const menuItemClasses = "transition-all duration-200 text-theme-foreground hover:opacity-80 outline-hover"
 </script>
 
 <template>
   <div class="flex flex-col justify-between min-h-screen" @click="navActive = false">
     <header class="z-50 w-full top-0 flex justify-center" :class="{ 'fixed': onHome, 'sticky': !onHome }">
       <div class="absolute lg:shadow-md lg:shadow-black/30 -z-10 inset-0 lg:bg-linear-to-r from-theme-1 to-theme-2"
-        :class="{ 'not-hover:lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading, 'lg:bg-none lg:bg-gray-950': onHome }">
+        :class="{ 'lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading, 'lg:bg-none lg:bg-gray-950': onHome }">
       </div>
       <div class="w-full flex justify-between max-w-[1200px] lg:items-center flex-col lg:flex-row"
         :class="{ 'lg:py-5': store.scrolled, 'lg:py-7': !store.scrolled, 'transition-all ease-in-out duration-500': !loading }">
@@ -91,8 +91,8 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
         <div class="relative z-10 gap-6 pr-5 lg:pl-5 pl-7 flex justify-between items-center w-full"
           :class="{ 'not-lg:py-4': store.scrolled, 'not-lg:py-6': !store.scrolled, 'transition-all duration-500': !loading }">
           <div
-            class="absolute -z-50 inset-0 not-lg:shadow-md not-lg:shadow-black/30 not-lg:bg-linear-to-r from-theme-1 to-theme-2"
-            :class="{ 'not-hover:not-lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading, 'not-lg:bg-none not-lg:bg-gray-950': onHome }">
+            class="absolute -z-50 inset-0 not-lg:bg-linear-to-r from-theme-1 to-theme-2"
+            :class="{ 'not-lg:opacity-0': darkenNav, 'transition-opacity duration-500': !loading, 'not-lg:bg-none not-lg:bg-gray-950': onHome  && !navActive, 'not-lg:shadow-md not-lg:shadow-black/30': !navActive }">
           </div>
 
           <NuxtLink to="/">
@@ -160,8 +160,8 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
         </div>
 
         <nav ref="mobileNav"
-          class="h-full py-7 px-5 gap-7 justify-end flex-col flex bg-linear-to-r from-theme-1 to-theme-2" :class="{
-            '!flex opacity-100': navActive, 'opacity-0': !navActive, 'lg:hidden transition-all duration-500': !loading, 'not-lg:bg-none not-lg:bg-gray-950': onHome
+          class="h-full py-7 px-5 gap-7 justify-end flex-col flex bg-linear-to-r from-theme-1 to-theme-2 not-lg:shadow-md not-lg:shadow-black/30" :class="{
+            '!flex opacity-100': navActive, 'opacity-0': !navActive, 'lg:hidden transition-all duration-500': !loading,
           }">
           <NuxtLink v-for="route in routes" :class="menuItemClasses" :to="route[0]" @click="navActive = false">{{
             route[1] }}</NuxtLink>
@@ -182,7 +182,7 @@ const menuItemClasses = "transition-all duration-500 text-theme-foreground hover
           </a>
         </nav>
 
-        <nav class="not-lg:hidden h-full px-5 gap-7 justify-end flex-row flex items-center"
+        <nav class="not-lg:hidden h-full px-5 gap-7 justify-end flex-row flex items-center "
           :class="{ 'duration-500 transition-all': !loading }">
           <NuxtLink v-for="route in routes" :class="[menuItemClasses, { 'text-white': darkenNav }]" :to="route[0]"
             @click="navActive = false">{{

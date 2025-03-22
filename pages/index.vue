@@ -28,6 +28,7 @@ const startOfContent = ref();
       <div class="flex flex-col items-center">
         <img src="~/assets/logo_white.svg" class="h-12" />
         <p class="mt-10 text-center text-xl !text-white">Queerer Poetry Slam in Hamburg</p>
+        <p class="mt-3 text-center text-xl !text-white">Nächster Termin am {{ nextSlam?.date.toLocaleDateString("de") }}</p>
       </div>
       <button ref="startOfContent"
         class="motion-safe:animate-bounce absolute bottom-0 opacity-50 hover:opacity-100 cursor-pointer"
