@@ -9,7 +9,7 @@ import { setSeo } from '~/helpers';
 const {futureSlams, pastSlams} = computeData();
 
 setSeo(
-  "Veranstaltungen - Saferspace Slam",
+  "Veranstaltungen — Saferspace Slam",
   "Hier findest du unsere aktuellen und vergangenen Veranstaltungen."
 );
 

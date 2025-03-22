@@ -19,7 +19,7 @@ const slamDate = new Date(useRoute().params.slamDate as string).toLocaleDateStri
 const dueDate = new Date(new Date(useRoute().params.slamDate as string).getTime() - 5 * 24 * 60 * 60 * 1000).toLocaleDateString('de');
 
 setSeo(
-    `Bestätigung ${slamDate} - Saferspace Slam`,
+    `Bestätigung ${slamDate} — Saferspace Slam`,
     `Bestätige hier bitte deinen Auftritt am ${slamDate} bei uns`
 );
 

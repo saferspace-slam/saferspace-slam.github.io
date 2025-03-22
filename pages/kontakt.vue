@@ -8,7 +8,7 @@ import { emptyFormPayload, FormData } from '~/forms';
 import { setSeo } from '~/helpers';
 
 setSeo(
-    "Kontakt - Saferspace Slam",
+    "Kontakt — Saferspace Slam",
     "Du hast Fragen, Ideen, Anmerkungen, Kritik oder Lob? Dann kannst du uns gerne hier kontaktieren."
 );
 

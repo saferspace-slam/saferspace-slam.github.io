@@ -14,7 +14,7 @@ import { setSeo } from '~/helpers';
 const { futureSlams } = computeData();
 
 setSeo(
-    "Mitmachen - Saferspace Slam",
+    "Mitmachen — Saferspace Slam",
     "Du möchtest bei uns auftreten? Dann findest du hier weitere Informationen und ein Formular zum Anmelden."
 );
 

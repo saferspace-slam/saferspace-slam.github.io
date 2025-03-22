@@ -9,7 +9,7 @@ import { setSeo } from '~/helpers';
 const name = useRoute().params.name as string;
 
 setSeo(
-    `Dateiupload ${name}`,
+    `Dateiupload ${name} — Saferspace Slam`,
     `Hier kannst du Dateien für uns hochladen`
 );
 
