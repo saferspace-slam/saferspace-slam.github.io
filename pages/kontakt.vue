@@ -41,7 +41,7 @@ const formPayload = form.payload;
                     </div>
                     <p>
                         Dann kannst du uns gerne auf Instagram schreiben (<a class="text-link underline"
-                            href="mailto:kontakt@saferspace-slam.de">saferspace_slam</a>)
+                            href="https://www.instagram.com/saferspace_slam/">saferspace_slam</a>)
                     </p>
                 </div>
                 <div class="flex items-center gap-2">
