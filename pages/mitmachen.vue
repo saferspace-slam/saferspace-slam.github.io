@@ -99,7 +99,7 @@ console.log({ slams, futureSlams, slamDates })
                     placeholder="Wann möchtest du am liebsten auftreten?" :options="slamDates" />
 
 
-                <TextAreaInput required v-model="formPayload.aboutMe" display-name="Über dich"
+                <TextAreaInput required v-model="formPayload.aboutMe" class="not-xs:h-50" display-name="Über dich"
                     placeholder="Erzähl uns gerne ein bisschen was über dich! Was für Texte schreibst du? Wäre das dein erster Slam oder dein hundertster Auftritt? Was motiviert dich zum Schreiben?" />
                 <CheckboxInput v-model="formPayload.travelExpenses"
                     display-name='Ich brauche eine Fahrtkostenerstattung (nur mit Beleg und bis zu 50€)' />

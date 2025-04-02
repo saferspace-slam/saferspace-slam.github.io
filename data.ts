@@ -20,8 +20,8 @@ export const computeData = () => {
     const nextSlam: Ref<Slam | undefined> = ref();
 
     onMounted(() => {
-        futureSlams.value = slams.filter(s => s.date >= new Date()).sort((a, b) => a.date.getTime() - b.date.getTime());
-        pastSlams.value = slams.filter(s => s.date < new Date()).sort((a, b) => a.date.getTime() - b.date.getTime()).reverse();
+        futureSlams.value = slams.filter(s => s.endDateTime >= new Date()).sort((a, b) => a.date.getTime() - b.date.getTime());
+        pastSlams.value = slams.filter(s => s.endDateTime < new Date()).sort((a, b) => a.date.getTime() - b.date.getTime()).reverse();
         nextSlam.value = futureSlams.value[0];
         console.log({futureSlams, pastSlams, nextSlam});
     });
