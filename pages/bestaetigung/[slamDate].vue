@@ -15,7 +15,7 @@ import { setSeo } from '~/helpers';
 
 const { futureSlams } = computeData();
 
-const slamDate = new Date(useRoute().params.slamDate as string).toLocaleDateString('de', {dateStyle: 'long'});
+const slamDate = new Date(useRoute().params.slamDate as string).toLocaleDateString('de', { dateStyle: 'long' });
 const dueDate = new Date(new Date(useRoute().params.slamDate as string).getTime() - 7 * 24 * 60 * 60 * 1000).toLocaleDateString('de');
 
 setSeo(
@@ -39,7 +39,9 @@ type Data = {
     publishConsent: boolean | undefined,
     usePreviousIntroduction: boolean,
     textsText: string,
-    textsFiles: File[],
+    textsFile1: File[],
+    textsFile2: File[],
+    textsFile3: File[],
 }
 
 function emptyData(): Data {
@@ -59,7 +61,9 @@ function emptyData(): Data {
         publishConsent: undefined,
         usePreviousIntroduction: false,
         textsText: "",
-        textsFiles: [],
+        textsFile1: [],
+        textsFile2: [],
+        textsFile3: [],
     }
 }
 
@@ -86,7 +90,7 @@ ${data.introduction ?
                 `,
         files: [
             ...(data.pictures.length ? [{ name: `${data.name} Foto/Video - ${data.pictures[0].name}`, file: data.pictures[0] }] : []),
-            ...data.textsFiles.map((file, i) => {
+            ...[data.textsFile1, data.textsFile2, data.textsFile3].flat().map((file, i) => {
                 return {
                     name: `${data.name} Text ${i + 1} - ${file.name}`,
                     file,
@@ -159,10 +163,17 @@ console.log({ slams, futureSlams, slamDates })
                     v-model="formPayload.textsText" display-name="Texte für hörgeschädigte Menschen"
                     placeholder="Kopiere hier bitte deine Texte rein" />
 
-                <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles" required multiple
+                <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles" required
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
-                    v-model="formPayload.textsFiles"
-                    display-name="Texte für hörgeschädigte Menschen (mehrere auswählbar)" />
+                    v-model="formPayload.textsFile1" display-name="Für hörgeschädigte Menschen (Text 1)" />
+
+                <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles" required
+                    :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
+                    v-model="formPayload.textsFile2" display-name="Für hörgeschädigte Menschen (Text 2)" />
+
+                <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles"
+                    :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
+                    v-model="formPayload.textsFile3" display-name="Für hörgeschädigte Menschen (Text 3, optional)" />
 
                 <BooleanRadioButtonsInput option-false="Nein, ich stimme nicht zu" option-true="Ja, ich stimme zu"
                     v-model="formPayload.photoConsent"
