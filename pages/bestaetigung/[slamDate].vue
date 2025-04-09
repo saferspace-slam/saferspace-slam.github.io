@@ -167,9 +167,9 @@ console.log({ slams, futureSlams, slamDates })
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
                     v-model="formPayload.textsFile1" display-name="Für hörgeschädigte Menschen (Text 1)" />
 
-                <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles" required
+                <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles"
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
-                    v-model="formPayload.textsFile2" display-name="Für hörgeschädigte Menschen (Text 2)" />
+                    v-model="formPayload.textsFile2" display-name="Für hörgeschädigte Menschen (Text 2, optional für Feature)" />
 
                 <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles"
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
