@@ -15,6 +15,10 @@ import { setSeo } from '~/helpers';
 
 const { futureSlams } = computeData();
 
+if ((useRoute().params.slamDate as string) === "2025-04-16") {
+    onMounted(() => window.location.replace("https://saferspace-slam.de/bestaetigung/2025-05-21"))
+}
+
 const slamDate = new Date(useRoute().params.slamDate as string).toLocaleDateString('de', { dateStyle: 'long' });
 const dueDate = new Date(new Date(useRoute().params.slamDate as string).getTime() - 7 * 24 * 60 * 60 * 1000).toLocaleDateString('de');
 
