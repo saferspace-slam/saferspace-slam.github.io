@@ -71,7 +71,8 @@ console.log({ slams, futureSlams, slamDates })
                     </a>
                     <br><br>
                     Wir werden euch einige Impulse geben, aber hauptsächlich geht es darum, gemeinsam ins kreative
-                    Schreiben zu kommen.
+                    Schreiben zu kommen. Falls ihr wollt, könnt ihr eure Texte dann beim Slam am 16.7. vortragen, das
+                    müsst ihr aber nicht, um am Schreibnachmittag teilzunehmen.
                     <br><br>
                     Es wird Snacks geben, also schreib gerne ins Formular, falls du irgendwelche Allergien hast.
                     <br><br>
