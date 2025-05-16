@@ -38,8 +38,9 @@ function generatePayload(data: Data): Payload {
     return {
         name: data.name,
         email: data.email,
-        subject: `Anmeldung Workshop 13.7.`,
+        subject: `Anmeldung 13.7.`,
         message: `
+Name: <strong>${data.name}</strong><br>
 Email: <strong>${data.email}</strong><br>
 Handynummer: <strong>${data.phone || 'Keine'}</strong><br>
 Allergien: <strong>${data.allergies}</strong>`,
