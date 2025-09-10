@@ -41,7 +41,7 @@ const darkenNav = computed(() => onHome.value && !store.value.scrolled && !navAc
 const routes = [
   ["/", "Startseite"],
   ["/veranstaltungen", "Veranstaltungen"],
-  ["/schreibnachmittag", "Schreibnachmittag"],
+  // ["/schreibnachmittag", "Schreibnachmittag"],
   ["/mitmachen", "Mitmachen"],
   ["/kontakt", "Kontakt"],
 ]
