@@ -20,7 +20,7 @@ if ((useRoute().params.slamDate as string) === "2025-04-16") {
 }
 
 const slamDate = new Date(useRoute().params.slamDate as string).toLocaleDateString('de', { dateStyle: 'long' });
-const dueDate = new Date(new Date(useRoute().params.slamDate as string).getTime() - 5 * 24 * 60 * 60 * 1000).toLocaleDateString('de');
+const dueDate = new Date(new Date(useRoute().params.slamDate as string).getTime() - 2 * 24 * 60 * 60 * 1000).toLocaleDateString('de');
 
 setSeo(
     `Bestätigung ${slamDate} — Saferspace Slam`,
