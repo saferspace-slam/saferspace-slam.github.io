@@ -153,12 +153,12 @@ console.log({ slams, futureSlams, slamDates })
                 <TextInput v-model="formPayload.pronouns" display-name="Pronomen (falls du welche benutzt)"
                     placeholder='Deine Pronomen' type="text" />
 
-                <CheckboxInput v-model="formPayload.dontIncludeTexts"
-                    display-name='Ich möchte meine Texte *nicht* für hörgeschädigte Menschen bereitstellen.' />
-
                 <TextAreaInput class="not-xs:h-50" required
                     v-model="formPayload.contentWarnings" display-name="Content Notes"
                     placeholder="Nenne hier bitte Themen in deinen Texten, die für manche Menschen potenziell retraumatisierend sind. So können wir im Vorhinein darüber informieren." />
+
+                <CheckboxInput v-model="formPayload.dontIncludeTexts"
+                    display-name='Ich möchte meine Texte *nicht* für hörgeschädigte Menschen bereitstellen.' />
 
                 <ToggleInput v-if="!formPayload.dontIncludeTexts" v-model="formPayload.textsUploadFiles"
                     option-false='Texte reinkopieren' option-true="Texte als Dateien hochladen" />
