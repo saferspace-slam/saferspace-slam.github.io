@@ -80,7 +80,7 @@ function generatePayload(data: Data): Payload {
 Name: <strong>${data.name}</strong><br>
 Stage Name: <strong>${data.stageName || "Keiner"}</strong><br>
 Pronomen: <strong>${data.pronouns || "Keine"}</strong><br>
-Inhaltliche Warnungen: <strong>${data.contentWarnings}</strong><br>
+Inhaltliche Warnungen: <strong>${data.contentWarnings || "nicht ausgefüllt"}</strong><br>
 Zustimmung Ankündigung: <strong>${data.introduction ? "Ja" : "Nein"}</strong><br>
 Zustimmung Fotos/Videos: <strong>${data.photoConsent ? "Ja" : "Nein"}</strong><br>
 Zustimmung Veröffentlichung Fotos/Videos: <strong>${data.publishConsent ? "Ja" : "Nochmal nachfragen"}</strong><br>
@@ -156,7 +156,7 @@ console.log({ slams, futureSlams, slamDates })
                 <CheckboxInput v-model="formPayload.dontIncludeTexts"
                     display-name='Ich möchte meine Texte *nicht* für hörgeschädigte Menschen bereitstellen.' />
 
-                <TextAreaInput class="not-xs:h-50" required v-if="formPayload.dontIncludeTexts"
+                <TextAreaInput class="not-xs:h-50" required
                     v-model="formPayload.contentWarnings" display-name="Content Notes"
                     placeholder="Nenne hier bitte Themen in deinen Texten, die für manche Menschen potenziell retraumatisierend sind. So können wir im Vorhinein darüber informieren." />
 
