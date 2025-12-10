@@ -26,7 +26,7 @@ const activePage: Ref<"future" | "past"> = ref("future");
                 <span class="material-symbols-outlined">
                     schedule
                 </span>
-                Jeden 3. Mittwoch im Monat um&nbsp;20:00&nbsp;Uhr
+                Jeden 3. Mittwoch im Monat um&nbsp;20:00&nbsp;Uhr (ab 2026 nur noch alle zwei Monate)
             </div>
             <a href="https://maps.app.goo.gl/vmScMdnrRQ9NGecB9" target="_blank">
                 <div class="text-link flex gap-3 items-center">
