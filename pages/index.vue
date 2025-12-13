@@ -33,7 +33,7 @@ onMounted(() => {
       <div class="flex flex-col items-center">
         <img src="~/assets/logo_white.svg" class="h-12" />
         <p class="mt-10 text-center text-xl !text-white">Queerer Poetry Slam in Hamburg</p>
-        <p class="mt-3 text-center text-xl !text-white">Nächster Termin am {{ nextSlam?.date.toLocaleDateString("de") }}Achtung! Der Slam am 17.12. muss leider ausfallen.</p>
+        <p class="mt-3 text-center text-xl !text-white">Nächster Termin am {{ nextSlam?.date.toLocaleDateString("de") }}</p>
         <p class="mt-3 text-center text-xl !text-white" v-if="date && date <= new Date('2025-12-18')">Achtung! Der Slam am 17.12. muss leider ausfallen.</p>
       </div>
       <button ref="startOfContent"
