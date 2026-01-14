@@ -101,8 +101,8 @@ console.log({ slams, futureSlams, slamDates })
 
                 <TextAreaInput required v-model="formPayload.aboutMe" class="not-xs:h-50" display-name="Über dich"
                     placeholder="Erzähl uns gerne ein bisschen was über dich! Was für Texte schreibst du? Wäre das dein erster Slam oder dein hundertster Auftritt? Was motiviert dich zum Schreiben?" />
-                <CheckboxInput v-model="formPayload.travelExpenses"
-                    display-name='Ich brauche eine Fahrtkostenerstattung (nur mit Beleg und bis zu 50€)' />
+                <!--<CheckboxInput v-model="formPayload.travelExpenses"
+                    display-name='Ich brauche eine Fahrtkostenerstattung (nur mit Beleg und bis zu 50€)' />-->
 
             </Form>
         </div>
