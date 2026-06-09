@@ -28,3 +28,11 @@ export function setSeo(title: string, description: string, ) {
         ]
     })
 }
+
+export function dateToANSI(date: Date): string {
+    return `${date.getFullYear()}-${padNumber(date.getMonth()+1, 2)}-${padNumber(date.getDate(), 2)}`
+}
+
+export function padNumber(n: number, width: number, z: string = "0") {
+  return String(n).padStart(width, z);
+}

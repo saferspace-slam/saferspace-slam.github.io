@@ -11,12 +11,13 @@ import FileInput from '~/components/forms/FileInput.vue';
 import ToggleInput from '~/components/forms/ToggleInput.vue';
 import { computeData, slams } from '~/data';
 import { FormData, type Payload, type PayloadGenerator } from '~/forms';
-import { setSeo } from '~/helpers';
+import { dateToANSI, setSeo } from '~/helpers';
 
 const { futureSlams } = computeData();
 
-if ((useRoute().params.slamDate as string) === "2025-04-16") {
-    onMounted(() => window.location.replace("https://saferspace-slam.de/bestaetigung/2025-05-21"))
+const routeSlamDate = new Date(useRoute().params.slamDate as string);
+if (routeSlamDate < new Date()) {
+    onMounted(() => window.location.replace(`${dateToANSI(futureSlams.value[0]?.date)}`))
 }
 
 const slamDate = new Date(useRoute().params.slamDate as string).toLocaleDateString('de', { dateStyle: 'long' });
@@ -153,8 +154,8 @@ console.log({ slams, futureSlams, slamDates })
                 <TextInput v-model="formPayload.pronouns" display-name="Pronomen (falls du welche benutzt)"
                     placeholder='Deine Pronomen' type="text" />
 
-                <TextAreaInput class="not-xs:h-50" required
-                    v-model="formPayload.contentWarnings" display-name="Content Notes"
+                <TextAreaInput class="not-xs:h-50" required v-model="formPayload.contentWarnings"
+                    display-name="Content Notes"
                     placeholder="Nenne hier bitte Themen in deinen Texten, die für manche Menschen potenziell retraumatisierend sind. So können wir im Vorhinein darüber informieren." />
 
                 <CheckboxInput v-model="formPayload.dontIncludeTexts"
@@ -173,7 +174,8 @@ console.log({ slams, futureSlams, slamDates })
 
                 <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles"
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
-                    v-model="formPayload.textsFile2" display-name="Für hörgeschädigte Menschen (Text 2, optional für Feature)" />
+                    v-model="formPayload.textsFile2"
+                    display-name="Für hörgeschädigte Menschen (Text 2, optional für Feature)" />
 
                 <FileInput v-if="!formPayload.dontIncludeTexts && formPayload.textsUploadFiles"
                     :file-types="['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/pdf', 'text/plain', '.md', '.pages', 'application/vnd.oasis.opendocument.text']"
