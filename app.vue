@@ -228,7 +228,7 @@ const menuItemClasses = "transition-all duration-200 text-theme-foreground hover
           <span class="material-symbols-outlined">
             schedule
           </span>
-          Jeden 3. Mittwoch im Monat um&nbsp;20:00&nbsp;Uhr
+          <a href="veranstaltungen">3. Mittwoch im Monat um&nbsp;20:00&nbsp;Uhr (in gerade Monaten)</a>
         </div>
         <a href="https://maps.app.goo.gl/vmScMdnrRQ9NGecB9" class="!text-white" target="_blank">
           <div class="flex gap-3 items-center">
