@@ -16,8 +16,10 @@ import { dateToANSI, setSeo } from '~/helpers';
 const { futureSlams } = computeData();
 
 const routeSlamDate = new Date(useRoute().params.slamDate as string);
+
 const startOfToday = new Date()
 startOfToday.setUTCHours(0, 0, 0, 0);
+
 if (routeSlamDate < startOfToday) {
     onMounted(() => window.location.replace(`${dateToANSI(futureSlams.value[0]?.date)}`))
 }
